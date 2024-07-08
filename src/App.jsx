@@ -20,6 +20,10 @@ function App() {
       setCart(prevCar => [...prevCar, item])
     }
   }
+
+  function removeFromCart(id) {
+    setCart(prevCar => prevCar.filter(guitar => guitar.id != id))
+  }
   /* 
     useState(() => {
       setData(db)
@@ -28,7 +32,8 @@ function App() {
   return (
     <>
       <Header
-      cart={cart}
+        cart={cart}
+        removeFromCart={removeFromCart}
       />
       <main className="container-xl mt-5">
 
@@ -44,6 +49,7 @@ function App() {
                 key={guitar.id}
                 guitar={guitar}
                 addToCart={addToCart}
+
               />)
             )
           }
