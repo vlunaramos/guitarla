@@ -6,6 +6,20 @@ import { db } from './data/db'
 
 function App() {
   const [data, setData] = useState(db)
+  const [cart, setCart] = useState([])
+
+  function addToCart(item) {
+    const itemExist = cart.findIndex(guitar => guitar.id === item.id)
+    if (itemExist >= 0) {
+      const updateCart = [...cart]
+      updateCart[itemExist].quantity++
+      setCart(updateCart)
+    }
+    else {
+      item.quantity = 1
+      setCart(prevCar => [...prevCar, item])
+    }
+  }
   /* 
     useState(() => {
       setData(db)
@@ -25,9 +39,9 @@ function App() {
             data.map((guitar) =>
             (
               <Guitar
-              key={guitar.id}
+                key={guitar.id}
                 guitar={guitar}
-
+                addToCart={addToCart}
               />)
             )
           }
