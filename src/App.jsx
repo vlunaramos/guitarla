@@ -24,6 +24,19 @@ function App() {
   function removeFromCart(id) {
     setCart(prevCar => prevCar.filter(guitar => guitar.id != id))
   }
+
+  function increasQuantity(id) {
+    const updateCart = cart.map(item => {
+      if (item.id === id) {
+        return {
+          ...item,
+          quantity: item.quantity + 1
+        }
+      }
+      return item
+    })
+    setCart(updateCart)
+  }
   /* 
     useState(() => {
       setData(db)
@@ -34,6 +47,7 @@ function App() {
       <Header
         cart={cart}
         removeFromCart={removeFromCart}
+        increasQuantity={increasQuantity}
       />
       <main className="container-xl mt-5">
 
